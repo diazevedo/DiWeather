@@ -22,27 +22,27 @@ export const Image = styled.Image`
   position: absolute;
   right: -10%;
   bottom: -10%;
-  width: 185px;
-  height: 151px;
+  width: 171px;
+  height: 140px;
 `;
 
 export const ContainerConditions = styled.View`
-  margin-top: 45px;
+  margin-top: 40px;
   position: absolute;
   align-items: center;
 `;
 
 export const Degrees = styled.Text.attrs({ includeFontPadding: false })`
-  font-size: 115px;
+  font-size: 120px;
   color: ${colors.second};
-  font-weight: 600;
-  height: 115px;
+  font-weight: 500;
+  height: 120px;
 `;
 
 export const Condition = styled.Text`
   font-size: 27px;
   color: ${colors.second};
-  margin-top: 15px;
+  margin-top: 18px;
   text-align: auto;
 `;
 
@@ -50,7 +50,6 @@ export const Humidity = styled.Text`
   font-size: 25px;
   color: ${colors.second};
   font-weight: 600;
-  /* margin-top: 20px; */
   opacity: ${(props) => (props.isLast ? '0.5' : '1')};
-  margin-top: ${(props) => (props.isLast ? '10px' : '20px')};
+  margin-top: 10px;
 `;
