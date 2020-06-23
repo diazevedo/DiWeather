@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import img from '~/assets/images/card-sunny.png';
 import img from '~/assets/images/sunny-background.png';
 import clouds from '~/assets/images/sun-and-cloud.png';
 

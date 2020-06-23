@@ -5,7 +5,6 @@ import colors from '~/styles/colors';
 import * as C from './styles';
 
 const Header = (props) => {
-  console.tron.log(props);
   return (
     <C.Container>
       <TouchableWithIcon icon="align-left" size={30} color={colors.primary} />
