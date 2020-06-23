@@ -17,7 +17,7 @@ const forecast = [
   {
     id: 1,
     day: 'tuesday',
-    condition: 'storms',
+    condition: 'windy',
     degreesAverage: 50,
     degreesMin: 52,
     degreesMax: 64,
@@ -25,7 +25,7 @@ const forecast = [
   {
     id: 2,
     day: 'wed',
-    condition: 'cloudy',
+    condition: 'storms',
     degreesAverage: 50,
     degreesMin: 52,
     degreesMax: 62,
@@ -33,19 +33,12 @@ const forecast = [
   {
     id: 3,
     day: 'thursday',
-    condition: 'windy',
+    condition: 'cloudy',
     degreesAverage: 25,
     degreesMin: 20,
     degreesMax: 30,
   },
 ];
-
-const icons = {
-  storms: '~/assets/images/storms.png',
-  sunny: '~/assets/images/sunny.png',
-  cloudy: '.~/assets/images/rainny.png',
-  windy: '~/assets/images/windy.png',
-};
 
 const NextDays = () => {
   return (

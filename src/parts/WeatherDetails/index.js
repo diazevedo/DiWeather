@@ -16,7 +16,7 @@ const WeatherDetails = () => {
         <C.Degrees>25°</C.Degrees>
         <C.Condition>Clouds & sun</C.Condition>
         <C.Humidity>Humidity</C.Humidity>
-        <C.Humidity>35 °</C.Humidity>
+        <C.Humidity isLast>35°</C.Humidity>
       </C.ContainerConditions>
     </C.Container>
   );
