@@ -1,14 +1,14 @@
 import React from 'react';
 
+import DaysButtons from '~/parts/DaysButton';
+import WeatherDetails from '~/parts/WeatherDetails';
 import * as C from './styles';
 
 const Main = () => {
   return (
     <C.Container>
-      <C.Text>
-        Hi, Thanks for using my React Native template. if you liked that buy me
-        a coffee.
-      </C.Text>
+      <DaysButtons />
+      <WeatherDetails />
     </C.Container>
   );
 };

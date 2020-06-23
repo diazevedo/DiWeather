@@ -4,7 +4,8 @@ import TouchableWithIcon from '~/components/TouchableWithIcon';
 import colors from '~/styles/colors';
 import * as C from './styles';
 
-const Header = () => {
+const Header = (props) => {
+  console.tron.log(props);
   return (
     <C.Container>
       <TouchableWithIcon icon="align-left" size={30} color={colors.primary} />

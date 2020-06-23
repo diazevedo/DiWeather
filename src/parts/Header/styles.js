@@ -4,6 +4,7 @@ import fontSizes from '~/styles/fontsSizes';
 
 export const Container = styled.View`
   width: 100%;
+  background-color: #fff;
   height: 100%;
   flex-direction: row;
   justify-content: space-between;

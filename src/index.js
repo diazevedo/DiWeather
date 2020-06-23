@@ -22,8 +22,9 @@ const App = () => (
       <Stack.Navigator
         screenOptions={{
           headerTitleAlign: 'left',
-          headerLeftContainerStyle: {
-            marginLeft: 100,
+          headerStyle: {
+            backgroundColor: '#fff',
+            shadowColor: 'transparent',
           },
         }}
         initialRouteName="Home">
