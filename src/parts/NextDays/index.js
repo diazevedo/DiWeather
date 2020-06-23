@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CardForecast from '~/components/CardForecast';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import ListFooter from '~/components/ListFooter';
 
 import * as C from './styles';
 
@@ -67,17 +67,7 @@ const NextDays = () => {
         keyExtractor={(item) => String(item.id)}
         horizontal
       />
-      <C.ListFooter>
-        <C.Button>
-          <Icon name="circle" size={22} color="#5D50FE" />
-        </C.Button>
-        <C.Button>
-          <Icon name="circle" size={22} color="#E7E4FF" />
-        </C.Button>
-        <C.Button>
-          <Icon name="circle" size={22} color="#E7E4FF" />
-        </C.Button>
-      </C.ListFooter>
+      <ListFooter circles={3} />
     </C.Container>
   );
 };

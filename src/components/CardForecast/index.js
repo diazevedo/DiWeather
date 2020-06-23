@@ -21,7 +21,7 @@ const CardForecast = ({
 
       <C.AverageDegree>{degreesAverage}°</C.AverageDegree>
       <C.DegreesContainer>
-        <C.RegularText>{degreesMin}°</C.RegularText>
+        <C.RegularText isMin>{degreesMin}°</C.RegularText>
         <C.RegularText>{degreesMax}°</C.RegularText>
       </C.DegreesContainer>
     </C.Container>

@@ -14,7 +14,7 @@ export const ContainerImage = styled.View`
 export const ImageBackground = styled.ImageBackground`
   width: 375px;
   height: 315px;
-  background-color: #5d50fe;
+  background-color: ${colors.active};
   border-radius: 44px;
 `;
 
