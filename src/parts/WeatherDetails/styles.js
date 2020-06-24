@@ -3,7 +3,6 @@ import colors from '~/styles/colors';
 
 export const Container = styled.View`
   align-items: center;
-  /* justify-content: center; */
   margin-top: 20px;
 `;
 
