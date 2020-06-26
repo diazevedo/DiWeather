@@ -12,7 +12,7 @@ export const Container = styled.View`
 `;
 
 export const Input = styled.TextInput.attrs({
-  placeholderTextColor: colors.primary,
+  placeholderTextColor: colors.third,
 })`
   align-self: center;
   width: 50%;

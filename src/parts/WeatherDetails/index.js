@@ -1,11 +1,15 @@
 import React from 'react';
 
+import { roundDegrees } from '~/utils/helpers/functions/temperature';
+
 import img from '~/assets/images/sunny-background.png';
 import clouds from '~/assets/images/sun-and-cloud.png';
 
 import * as C from './styles';
 
-const WeatherDetails = () => {
+const WeatherDetails = ({ weather }) => {
+  const { temp, weather: current, app_temp: feelsLike } = weather;
+
   return (
     <C.Container>
       <C.ContainerImage>
@@ -13,10 +17,13 @@ const WeatherDetails = () => {
         <C.Image source={clouds} />
       </C.ContainerImage>
       <C.ContainerConditions>
-        <C.Degrees>25°</C.Degrees>
-        <C.Condition>Clouds & sun</C.Condition>
-        <C.Humidity>Humidity</C.Humidity>
-        <C.Humidity isLast>35°</C.Humidity>
+        {/* <C.Degrees>{roundDegrees(temp)}°</C.Degrees> */}
+        <C.Condition>{current.description}</C.Condition>
+        <C.Condition>{new Date(1593259200 * 1000).toString()}</C.Condition>
+        <C.Condition>{new Date(1593259200 * 1000).getDay()}</C.Condition>
+        <C.Humidity>Feels Like</C.Humidity>
+
+        <C.Humidity isLast>{roundDegrees(feelsLike)}°</C.Humidity>
       </C.ContainerConditions>
     </C.Container>
   );

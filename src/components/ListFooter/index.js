@@ -9,8 +9,8 @@ const ListFooter = ({ circles }) => {
 
     for (let i = 0; i < numberOfCircles; i++) {
       newButtons.push(
-        <C.Button key={i}>
-          <Icon name="circle" size={22} color="#5D50FE" />
+        <C.Button key={i} onPress={() => console.tron.log(1)}>
+          <Icon name="circle" size={18} color="#5D50FE" />
         </C.Button>,
       );
     }

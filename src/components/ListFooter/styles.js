@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export const Container = styled.View`
   flex-direction: row;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: 40px;
 `;
 
 export const Button = styled(TouchableOpacity)`

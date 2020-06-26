@@ -12,6 +12,8 @@ const CardForecast = ({
   degreesMin,
   degreesMax,
 }) => {
+  // console.tron.log({ day });
+
   return (
     <C.Container dayColor={day}>
       <C.ImageBackground source={cloud} />

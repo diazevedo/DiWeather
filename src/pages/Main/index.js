@@ -1,32 +1,44 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 
-import api from '~/services/api';
+import { useSelector } from 'react-redux';
+
+import useFetch from '~/hooks/useFetch';
 
 import DaysButtons from '~/parts/DaysButton';
 import WeatherDetails from '~/parts/WeatherDetails';
 import NextDays from '~/parts/NextDays';
 
+import formateForecast from '~/utils/helpers/functions/formateDate.js';
+
 import * as C from './styles';
+const date = new Date();
 
 const Main = () => {
-  const loadData = async () => {
-    try {
-      const data = await api.get();
-      console.tron.log(data);
-    } catch (error) {
-      console.tron.log(error);
-    }
-  };
+  const searchedCity = useSelector((state) => state.searchedCity.city);
+  const options = React.useMemo(() => ({ q: searchedCity }), [searchedCity]);
 
-  React.useEffect(() => {
-    loadData();
-  }, [loadData]);
+  const [weather, , loading] = useFetch({
+    url: 'current',
+    options,
+  });
+
+  const [forecast, , loadingForecast] = useFetch({
+    url: 'daily',
+    options,
+    callback: React.useCallback((f) => formateForecast(f), []),
+  });
 
   return (
     <C.Container>
       <DaysButtons />
-      <WeatherDetails />
-      <NextDays />
+
+      {Object.keys(weather).length > 0 ? (
+        <>
+          <WeatherDetails weather={weather.pop()} />
+          <NextDays forecast={forecast} />
+        </>
+      ) : null}
     </C.Container>
   );
 };
