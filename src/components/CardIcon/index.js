@@ -7,6 +7,8 @@ import windy from '~/assets/images/windy.png';
 
 import * as C from './styles';
 
+/** Range of possible codes returned from the API */
+
 const STORMS_START = 200;
 const STORMS_END = 299;
 

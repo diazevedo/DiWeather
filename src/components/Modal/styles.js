@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import colors from '~/styles/colors';
+
 export const TouchableView = styled(TouchableOpacity)``;
 
 export const Container = styled.View`
@@ -21,7 +23,7 @@ export const Day = styled.Text`
   margin-top: 50px;
   font-size: 48px;
   font-weight: 600;
-  color: #fff;
+  color: ${colors.second};
   text-transform: capitalize;
 `;
 
@@ -29,7 +31,7 @@ export const RegularText = styled.Text`
   opacity: ${(props) => (props.isMin ? '0.5' : '1')};
   font-size: 30px;
   font-weight: 600;
-  color: #fff;
+  color: ${colors.second};
   text-transform: capitalize;
 `;
 
@@ -42,7 +44,7 @@ export const IconWrapper = styled.View`
 
 export const AverageDegree = styled.Text`
   font-size: 60px;
-  color: #fff;
+  color: ${colors.second};
 `;
 
 export const DegreesContainer = styled.View`

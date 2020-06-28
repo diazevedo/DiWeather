@@ -2,15 +2,11 @@ import styled from 'styled-components/native';
 import colors from '~/styles/colors';
 
 export const Container = styled.View`
+  height: 25%;
+  width: 100%;
   padding: 20px 35px;
-  /* flex: 1; */
   margin-top: 12%;
   border-radius: 25px;
-  /* flex: 1; */
-  height: 25%;
-
-  width: 100%;
-
   flex-direction: row;
   justify-content: space-between;
   background-color: ${colors.second};

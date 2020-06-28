@@ -12,7 +12,7 @@ import formateForecast from '~/utils/helpers/functions/formateDate.js';
 
 import * as C from './styles';
 
-const Main = () => {
+const Main = ({ navigation }) => {
   const searchedCity = useSelector((state) => state.searchedCity.city);
 
   const [daySelected, setDaySelected] = React.useState(0);
@@ -29,7 +29,10 @@ const Main = () => {
 
   return (
     <C.Container>
-      <DaysButtons onPress={handleSelectDay} />
+      <DaysButtons
+        onPress={handleSelectDay}
+        days={['Today', 'Tomorrow', 'After Tomorrow']}
+      />
 
       {loadingForecast ? (
         <C.LoadingWrapper>

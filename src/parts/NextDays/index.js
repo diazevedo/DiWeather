@@ -6,13 +6,33 @@ import ListFooter from '~/components/ListFooter';
 import Modal from '~/components/Modal';
 
 import colors from '~/styles/colors';
-import { Button, Text } from 'react-native';
 
 import * as C from './styles';
 
 const NextDays = ({ forecast }) => {
   const flatListRef = React.createRef();
   const modalizeRef = React.useRef(null);
+
+  const [activedItem, setActivedItem] = React.useState(0);
+
+  const onViewRef = React.useRef((viewableItems, i) => {
+    let item = 0;
+
+    if (viewableItems.viewableItems[0].index === 0) {
+      item = 0;
+    } else if (viewableItems.viewableItems[0].index <= 1) {
+      item = 1;
+    } else if (viewableItems.viewableItems[0].index <= 3) {
+      item = 2;
+    }
+
+    setActivedItem(item);
+  });
+
+  const viewConfigRef = React.useRef({
+    itemVisiblePercentThreshold: 100,
+  });
+
   const [weatherData, setWeatherData] = React.useState(null);
   const [modalBackgroundColor, setModalBackgroundColor] = React.useState(
     colors.monday,
@@ -24,6 +44,18 @@ const NextDays = ({ forecast }) => {
     modalizeRef.current?.open();
   };
 
+  const onPress = (index) => {
+    let itemfocus = 0;
+    if (index === 1) {
+      itemfocus = 1;
+    } else if (index === 2) {
+      itemfocus = 3;
+    }
+
+    setActivedItem(itemfocus);
+    flatListRef.current.scrollToIndex({ index: itemfocus, animated: false });
+  };
+
   return (
     <C.Container>
       <C.ListHeader>
@@ -31,10 +63,8 @@ const NextDays = ({ forecast }) => {
       </C.ListHeader>
       <C.List
         data={forecast}
-        // pagingEnabled
-        // initialScrollIndex={5}
-        // onViewableItemsChanged={(c) => console.tron.log(c)}
-        // onMomentumScrollBegin={() => console.tron.log(5454)}
+        onViewableItemsChanged={onViewRef.current}
+        viewabilityConfig={viewConfigRef.current}
         ref={flatListRef}
         renderItem={({ item }) => (
           <CardForecast
@@ -48,30 +78,25 @@ const NextDays = ({ forecast }) => {
         )}
         keyExtractor={(item, i) => String(i)}
         horizontal
-        // ListFooterComponent={() => (
-        //   <ListFooter circles={3} flatRef={flatListRef} />
-        // )}
       />
-      {/* <Button
-        title="buuton"
-        onPress={() =>
-          // flatListRef.current.scrollToIndex({ index: 2, animated: true })
-          flatListRef.current.scrollToOffset({ offset: 250, animated: true })
-        }
-      /> */}
-      <ListFooter circles={3} flatRef={flatListRef} />
+
+      <ListFooter
+        numOfButtons={3}
+        flatRef={flatListRef}
+        buttonSelected={activedItem}
+        onPress={onPress}
+      />
 
       <Modalize
         ref={modalizeRef}
-        modalTopOffset={90}
+        modalTopOffset={20}
         modalStyle={{
           backgroundColor: modalBackgroundColor,
-
           borderTopRightRadius: 60,
           borderTopLeftRadius: 60,
           alignItems: 'center',
         }}
-        withOverlay={true}>
+        withOverlay={false}>
         <Modal weatherData={weatherData} />
       </Modalize>
     </C.Container>

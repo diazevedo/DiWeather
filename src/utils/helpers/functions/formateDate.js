@@ -1,5 +1,6 @@
 import { fromUnixTime } from 'date-fns';
 import { roundDegrees } from '~/utils/helpers/functions/temperature';
+
 const weekdays = [
   'sunday',
   'monday',

@@ -9,7 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 
 import Main from '~/pages/Main';
-import WeatherDay from '~/pages/WeatherDay';
+import Initial from '~/pages/Initial';
 
 import Header from '~/parts/Header';
 
@@ -17,23 +17,7 @@ import '~/config/ReactotronConfig';
 
 import { store } from './store';
 
-const MainStack = createStackNavigator();
 const RootStack = createStackNavigator();
-
-function MainStackScreen() {
-  return (
-    <MainStack.Navigator
-      screenOptions={{
-        headerTitleAlign: 'left',
-        headerTitle: (props) => <Header {...props} />,
-        headerStyle: {
-          shadowColor: 'transparent',
-        },
-      }}>
-      <MainStack.Screen name="Home" component={Main} />
-    </MainStack.Navigator>
-  );
-}
 
 const App = () => (
   <SafeAreaProvider>
@@ -42,19 +26,26 @@ const App = () => (
         <StatusBar hidden={true} />
 
         <RootStack.Navigator
-          mode="modal"
-          initialRouteName="Home"
-          headerMode="none">
-          <RootStack.Screen name="Home" component={MainStackScreen} />
+          initialRouteName="Initial"
+          screenOptions={{
+            headerTitle: (props) => <Header {...props} />,
+          }}>
+          <RootStack.Screen
+            name="Initial"
+            component={Initial}
+            options={{ headerShown: false }}
+          />
 
           <RootStack.Screen
-            name="WeatherDay"
-            component={WeatherDay}
+            name="Main"
+            component={Main}
             options={{
-              title: 'My modal',
-              headerTitleStyle: {
-                fontWeight: 'bold',
+              headerTitleAlign: 'left',
+              headerTitle: (props) => <Header {...props} />,
+              headerStyle: {
+                shadowColor: 'transparent',
               },
+              headerLeft: false,
             }}
           />
         </RootStack.Navigator>
