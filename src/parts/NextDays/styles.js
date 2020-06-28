@@ -4,6 +4,7 @@ import colors from '~/styles/colors';
 export const Container = styled.View`
   padding: 20px;
   padding-right: 0px;
+  /* padding-right: 0px; */
   margin-top: 30px;
 `;
 export const List = styled.FlatList.attrs({

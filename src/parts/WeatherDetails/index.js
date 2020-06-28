@@ -17,10 +17,9 @@ const WeatherDetails = ({ weather }) => {
         <C.Image source={clouds} />
       </C.ContainerImage>
       <C.ContainerConditions>
-        {/* <C.Degrees>{roundDegrees(temp)}°</C.Degrees> */}
+        <C.Degrees>{roundDegrees(temp)}°</C.Degrees>
         <C.Condition>{current.description}</C.Condition>
-        <C.Condition>{new Date(1593259200 * 1000).toString()}</C.Condition>
-        <C.Condition>{new Date(1593259200 * 1000).getDay()}</C.Condition>
+
         <C.Humidity>Feels Like</C.Humidity>
 
         <C.Humidity isLast>{roundDegrees(feelsLike)}°</C.Humidity>

@@ -13,21 +13,11 @@ const weekdays = [
 function formateForecast(arrayOfWeather) {
   const forecastNextDays = arrayOfWeather.list.reduce((f, c) => {
     const dayIndex = fromUnixTime(c.dt).toISOString().split('T', 1)[0];
-    // const weekDayNumber = fromUnixTime(c.dt).getDay();
+    const dayOfTheWeek = getDayOfTheWeek(fromUnixTime(c.dt).getDay());
 
-    // console.tron.log(fromUnixTime(c.dt), dayIndex);
-
-    f[dayIndex] = f[dayIndex] || {
+    f[dayOfTheWeek] = f[dayOfTheWeek] || {
       day_date: dayIndex,
-      // day: getDayOfTheWeek(
-      //   weekDayNumber,
-      //   dayIndex,
-      //   fromUnixTime(c.dt).toISOString(),
-      // ),
-      day: getDayOfTheWeek(
-        new Date(fromUnixTime(c.dt).toISOString()).getDay(),
-        fromUnixTime(c.dt).toISOString(),
-      ),
+      day: getDayOfTheWeek(fromUnixTime(c.dt).getDay()),
       temp: 0,
       temp_min_day: c.main.temp_min,
       temp_max_day: c.main.temp_max,
@@ -38,26 +28,29 @@ function formateForecast(arrayOfWeather) {
     const weatherHourly = {
       fullDate: fromUnixTime(c.dt),
       dayIndice: dayIndex,
-      // day: getDayOfTheWeek(fromUnixTime(c.dt).getDay()),
+      day: getDayOfTheWeek(fromUnixTime(c.dt).getDay()),
       temp: c.main.temp,
       temp_min: c.main.temp_min,
       temp_max: c.main.temp_max,
       conditionCode: c.weather[0].id,
     };
 
-    if (c.main.temp_min < f[dayIndex].temp_min_day) {
-      f[dayIndex].temp_min_day = c.main.temp_min;
-    }
+    f[dayOfTheWeek].temp_min_day = updateMinTemperature(
+      c.main.temp_min,
+      f[dayOfTheWeek].temp_min_day,
+    );
 
-    if (c.main.temp_max < f[dayIndex].temp_max_day) {
-      f[dayIndex].temp_max_day = c.main.temp_max;
-    }
+    f[dayOfTheWeek].temp_max_day = updateMaxTemperature(
+      c.main.temp_max,
+      f[dayOfTheWeek].temp_max_day,
+    );
 
-    const numOfTempsOfDay = f[dayIndex].forecast.length === 0 ? 1 : 2;
+    const numOfTempsOfDay = f[dayOfTheWeek].forecast.length === 0 ? 1 : 2;
 
-    f[dayIndex].forecast.push(weatherHourly);
+    f[dayOfTheWeek].forecast.push(weatherHourly);
 
-    f[dayIndex].temp = (f[dayIndex].temp + c.main.temp) / numOfTempsOfDay;
+    f[dayOfTheWeek].temp =
+      (f[dayOfTheWeek].temp + c.main.temp) / numOfTempsOfDay;
 
     return f;
   }, {});
@@ -70,12 +63,24 @@ function formateForecast(arrayOfWeather) {
   return Object.values(forecastNextDays);
 }
 
-// formateForecast(forecast);
-
-function getDayOfTheWeek(day, dia, s) {
-  // console.tron.log(dia, 'dia');
-  console.tron.log({ day, dia, s, w: weekdays[day] });
+function getDayOfTheWeek(day) {
   return weekdays[day];
+}
+
+function isNewTemperatureHigher(newTemp, currentTemp) {
+  return newTemp > currentTemp;
+}
+
+function isNewTemperatureLower(newTemp, currentTemp) {
+  return newTemp < currentTemp;
+}
+
+function updateMinTemperature(newTemp, currentTemp) {
+  return isNewTemperatureLower(newTemp, currentTemp) ? newTemp : currentTemp;
+}
+
+function updateMaxTemperature(newTemp, currentTemp) {
+  return isNewTemperatureHigher(newTemp, currentTemp) ? newTemp : currentTemp;
 }
 
 export default formateForecast;

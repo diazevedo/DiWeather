@@ -9,7 +9,7 @@ import * as C from './styles';
 
 const NextDays = ({ forecast }) => {
   const flatListRef = React.createRef();
-  // console.tron.log(forecast[0], 'next days');
+  console.tron.log(forecast, 'next days');
 
   return (
     <C.Container>
@@ -18,7 +18,10 @@ const NextDays = ({ forecast }) => {
       </C.ListHeader>
       <C.List
         data={forecast[0]}
-        pagingEnabled
+        // pagingEnabled
+        // initialScrollIndex={5}
+        onViewableItemsChanged={(c) => console.tron.log(c)}
+        // onMomentumScrollBegin={() => console.tron.log(5454)}
         ref={flatListRef}
         renderItem={({ item }) => (
           <CardForecast
@@ -35,12 +38,13 @@ const NextDays = ({ forecast }) => {
         //   <ListFooter circles={3} flatRef={flatListRef} />
         // )}
       />
-      {/* <Button
+      <Button
         title="buuton"
         onPress={() =>
-          flatListRef.current.scrollToIndex({ index: 1, animated: true })
+          // flatListRef.current.scrollToIndex({ index: 2, animated: true })
+          flatListRef.current.scrollToOffset({ offset: 250, animated: true })
         }
-      /> */}
+      />
       <ListFooter circles={3} flatRef={flatListRef} />
     </C.Container>
   );
