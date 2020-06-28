@@ -6,4 +6,7 @@ export const Container = styled(SafeAreaView)`
   background-color: #fff;
 `;
 
-export const Text = styled.Text``;
+export const LoadingWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+`;

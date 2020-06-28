@@ -2,9 +2,9 @@ import React from 'react';
 
 import * as C from './styles';
 
-const TouchableRounded = ({ text, isActive = 0 }) => {
+const TouchableRounded = ({ text, isActive, onPress }) => {
   return (
-    <C.Button>
+    <C.Button onPress={onPress}>
       <C.Text isActive={isActive}>{text}</C.Text>
     </C.Button>
   );

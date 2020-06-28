@@ -1,5 +1,5 @@
 import { fromUnixTime } from 'date-fns';
-
+import { roundDegrees } from '~/utils/helpers/functions/temperature';
 const weekdays = [
   'sunday',
   'monday',
@@ -15,12 +15,20 @@ function formateForecast(arrayOfWeather) {
     const dayIndex = fromUnixTime(c.dt).toISOString().split('T', 1)[0];
     const dayOfTheWeek = getDayOfTheWeek(fromUnixTime(c.dt).getDay());
 
+    c.main.temp = roundDegrees(c.main.temp);
+
+    c.main.temp_min = roundDegrees(c.main.temp_min);
+    c.main.temp_max = roundDegrees(c.main.temp_max);
+    c.main.feels_like = roundDegrees(c.main.feels_like);
+
     f[dayOfTheWeek] = f[dayOfTheWeek] || {
       day_date: dayIndex,
       day: getDayOfTheWeek(fromUnixTime(c.dt).getDay()),
       temp: 0,
       temp_min_day: c.main.temp_min,
       temp_max_day: c.main.temp_max,
+      feels_like: c.main.feels_like,
+      description: c.weather[0].description,
       conditionCode: c.weather[0].id,
       forecast: [],
     };
@@ -49,17 +57,13 @@ function formateForecast(arrayOfWeather) {
 
     f[dayOfTheWeek].forecast.push(weatherHourly);
 
-    f[dayOfTheWeek].temp =
-      (f[dayOfTheWeek].temp + c.main.temp) / numOfTempsOfDay;
+    f[dayOfTheWeek].temp = roundDegrees(
+      (f[dayOfTheWeek].temp + c.main.temp) / numOfTempsOfDay,
+    );
 
     return f;
   }, {});
 
-  // console.tron.log(forecastNextDays);
-
-  // for (let i = 0; i <= Object.keys(forecastNextDays).length; i++) {
-  //   console.tron.log(forecastNextDays[i]);
-  // }
   return Object.values(forecastNextDays);
 }
 

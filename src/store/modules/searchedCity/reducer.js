@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  city: 'INITIAL VALUE',
+  city: 'Sydney,Australia',
 };
 
 const searchedCity = (state = INITIAL_STATE, action) => {

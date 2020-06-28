@@ -1,9 +1,9 @@
 import React from 'react';
 
-import storms from '~/assets/images/storms.png';
-import sunny from '~/assets/images/sunny.png';
-import cloudy from '~/assets/images/rainny.png';
-import windy from '~/assets/images/windy.png';
+import storms from '~/assets/images/rainny-small.png';
+import sunny from '~/assets/images/sunny-small.png';
+import cloudy from '~/assets/images/cloud-small.png';
+import windy from '~/assets/images/windy-small.png';
 
 import * as C from './styles';
 
@@ -25,7 +25,7 @@ const ATMOSPHERE_END = 799;
 const CLEAR = 800;
 const CLOUDS = 801;
 
-const CardIcon = ({ conditionCode }) => {
+const SmallIcon = ({ conditionCode }) => {
   if (conditionCode <= STORMS_START || conditionCode <= RAIN_START) {
     return <C.Image source={storms} />;
   }
@@ -45,4 +45,4 @@ const CardIcon = ({ conditionCode }) => {
   return <C.Image source={sunny} />;
 };
 
-export default CardIcon;
+export default SmallIcon;

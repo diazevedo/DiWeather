@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { forecast, current } from '~/utils/data/fakeWeather';
+import api from '~/services/api';
 
 const useFetch = ({ url, options, callback = false }) => {
   const [response, setResponse] = useState([]);
@@ -13,28 +14,17 @@ const useFetch = ({ url, options, callback = false }) => {
 
     const fetchData = async () => {
       try {
-        // console.tron.log(options, 'options');
-        // console.tron.log(url, 'url');
+        const result = await api.get(url, {
+          params: options,
+        });
 
-        // const response = await api.get(url, {
-        //   params: options,
-        // });
-
-        // console.tron.log(response);
-        // let { data } = response;
-        let data = {};
-        if (url === 'current') {
-          data = current;
-        } else {
-          data = forecast;
-        }
+        let { data } = result;
 
         if (callback) {
           data = callback(data);
-          // console.tron.log('alksndaslkdn');
         }
-        // console.tron.log(data);
-        setResponse([data]);
+
+        setResponse(data);
       } catch (err) {
         console.tron.log(err);
         setError(true);

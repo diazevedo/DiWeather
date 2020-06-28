@@ -43,6 +43,7 @@ export const Condition = styled.Text`
   color: ${colors.second};
   margin-top: 18px;
   text-align: auto;
+  text-transform: capitalize;
 `;
 
 export const Humidity = styled.Text`

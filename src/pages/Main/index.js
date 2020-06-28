@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-
+import { ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import useFetch from '~/hooks/useFetch';
@@ -12,31 +11,36 @@ import NextDays from '~/parts/NextDays';
 import formateForecast from '~/utils/helpers/functions/formateDate.js';
 
 import * as C from './styles';
-const date = new Date();
 
 const Main = () => {
   const searchedCity = useSelector((state) => state.searchedCity.city);
-  const options = React.useMemo(() => ({ q: searchedCity }), [searchedCity]);
 
-  const [weather, , loading] = useFetch({
-    url: 'current',
-    options,
-  });
+  const [daySelected, setDaySelected] = React.useState(0);
 
   const [forecast, , loadingForecast] = useFetch({
-    url: 'daily',
-    options,
+    url: 'forecast',
+    options: React.useMemo(() => ({ q: searchedCity }), [searchedCity]),
     callback: React.useCallback((f) => formateForecast(f), []),
   });
 
+  const handleSelectDay = (IndexButtonSelected) => {
+    setDaySelected(IndexButtonSelected);
+  };
+
   return (
     <C.Container>
-      <DaysButtons />
+      <DaysButtons onPress={handleSelectDay} />
 
-      {Object.keys(weather).length > 0 ? (
+      {loadingForecast ? (
+        <C.LoadingWrapper>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </C.LoadingWrapper>
+      ) : null}
+
+      {forecast.length > 0 ? (
         <>
-          <WeatherDetails weather={weather.pop()} />
-          <NextDays forecast={forecast} />
+          <WeatherDetails weather={forecast[daySelected]} />
+          <NextDays forecast={forecast.slice(1, 6)} />
         </>
       ) : null}
     </C.Container>
